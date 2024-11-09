@@ -29,4 +29,4 @@ Este documento detalha o fluxo de branches e releases para o projeto, incluindo 
 
 ## Para mais informações de nomenclatura de PRs e branches
 
-- [Pull Requests](./docs/patterns/pull-requests.md)
+- [Pull Requests](./patterns/pull-requests.md)
