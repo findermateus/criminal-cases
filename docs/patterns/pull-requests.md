@@ -5,7 +5,7 @@ Os cards de desenvolvimento no [JIRA](https://criminal-cases.atlassian.net/jira/
 ## Exemplo:
 ![Exemplo de card no JIRA](https://github.com/user-attachments/assets/4f0ed4ff-252f-4cab-a2a2-bf26202b3aa6)
 
-Se o card estiver identificado como 'DEV-3', o título do PR deve refletir essa referência. Os tipos de PR são definidos como Hotfix e Feature, portanto o título do PR deve seguir um desses formatos:
+Se o card estiver identificado como 'DEV-3', o título do PR e da branch deve refletir essa referência. Os tipos de PR são definidos como Hotfix e Feature, portanto o título do PR deve seguir um desses formatos:
 - `Hotfix/DEV-3`
 - `Feature/DEV-3`
   
