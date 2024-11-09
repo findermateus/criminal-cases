@@ -6,3 +6,5 @@ Repositório do projeto N3 para a disciplina de Gerenciamento e Configuração d
 # Padrões de Desenvolvimento
 - [Conventional Commits](./docs/patterns/conventional-commits.md)
 - [Pull Requests](./docs/patterns/pull-requests.md)
+# Releases
+- [Releases](./docs/releases.md)
