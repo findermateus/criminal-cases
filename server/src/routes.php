@@ -3,12 +3,11 @@
 namespace CriminalCases\App;
 
 use Slim\App;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Routing\RouteCollectorProxy;
+use CriminalCases\App\Controller\CrimeLoaderController;
 
 return function (App $app) {
-    $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Rota padrão');
-        return $response;
+    $app->group('/cases', function (RouteCollectorProxy $group) {
+        $group->get('/all', CrimeLoaderController::class . ':loadAllCrimes');
     });
 };
