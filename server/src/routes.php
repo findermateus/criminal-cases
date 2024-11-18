@@ -4,10 +4,11 @@ namespace CriminalCases\App;
 
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
-use CriminalCases\App\Controller\CrimeLoaderController;
+use CriminalCases\App\Controller\CrimeController;
 
 return function (App $app) {
     $app->group('/cases', function (RouteCollectorProxy $group) {
-        $group->get('/all', CrimeLoaderController::class . ':loadAllCrimes');
+        $group->get('/all', CrimeController::class . ':loadAllCrimes');
+        $group->post('/add', CrimeController::class . ':createCrime');
     });
 };
