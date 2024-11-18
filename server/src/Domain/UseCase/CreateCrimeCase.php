@@ -3,19 +3,20 @@
 namespace CriminalCases\App\Domain\UseCase;
 
 use CriminalCases\App\Domain\Entity\Crime;
-use CriminalCases\App\Domain\Repository\CrimeRepository;
+use CriminalCases\App\Domain\Interfaces\CrimeRepository;
 
 class CreateCrimeCase
 {
-    private $crime;
-    public function __construct($post)
+    private Crime $crime;
+    private CrimeRepository $crimeRepository;
+    public function __construct($post, CrimeRepository $crimeRepository)
     {
+        $this->crimeRepository = $crimeRepository;
         $this->setCrime($post);
     }
     public function execute()
     {
-        $crimeRepository = new CrimeRepository();
-        return $crimeRepository->createCrime($this->crime);
+        return $this->crimeRepository->createCrime($this->crime);
     }
     private function setCrime($post)
     {

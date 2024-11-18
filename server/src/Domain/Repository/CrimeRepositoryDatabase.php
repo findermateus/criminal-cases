@@ -3,8 +3,9 @@
 namespace CriminalCases\App\Domain\Repository;
 
 use CriminalCases\App\Domain\Entity\Crime;
+use CriminalCases\App\Domain\Interfaces\CrimeRepository;
 
-class CrimeRepository extends Repository
+class CrimeRepositoryDatabase extends Repository implements CrimeRepository
 {
     public function createCrime(Crime $crime)
     {
