@@ -2,14 +2,14 @@
 
 namespace CriminalCases\App\Domain\UseCase;
 
-use CriminalCases\App\Domain\DAO\CrimeDAO;
+use CriminalCases\App\Domain\Interfaces\CrimeDAO;
 
 class GetAllCrimesCase
 {
     private CrimeDAO $crimeDAO;
-    public function __construct()
+    public function __construct(CrimeDAO $crimeDAO)
     {
-        $this->crimeDAO = new CrimeDAO();
+        $this->crimeDAO = $crimeDAO;
     }
     public function execute()
     {

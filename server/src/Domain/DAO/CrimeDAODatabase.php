@@ -2,11 +2,12 @@
 
 namespace CriminalCases\App\Domain\DAO;
 
+use CriminalCases\App\Domain\Interfaces\CrimeDAO;
 use PDO;
 
-class CrimeDAO extends DAO
+class CrimeDAODatabase extends DAO implements CrimeDAO
 {
-    public function getAllCrimesWithSuspects()
+    public function getAllCrimesWithSuspects(): array
     {
         $sql = "SELECT crime.crime_id, crime.crime_title, crime.crime_description, crime.crime_solved, crime.guilty_id, ";
         $sql .= "suspect.suspect_id, suspect.suspect_name, suspect.suspect_age ";
