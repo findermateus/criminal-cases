@@ -10,7 +10,7 @@ use Dotenv\Dotenv;
 class Connection
 {
     private static Dotenv $dotenv;
-    
+
     public static function getConnection()
     {
         self::getEnvironment();
@@ -20,7 +20,6 @@ class Connection
         $user = $_ENV['DB_USER'];
         $password = $_ENV['DB_PASSWORD'];
         $dsn = self::getDSN($host, $dbName, $port);
-
         try {
             $pdo = new PDO($dsn, $user, $password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
