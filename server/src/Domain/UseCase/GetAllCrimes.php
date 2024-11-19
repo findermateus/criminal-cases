@@ -3,8 +3,9 @@
 namespace CriminalCases\App\Domain\UseCase;
 
 use CriminalCases\App\Domain\Interfaces\CrimeDAO;
+use CriminalCases\App\Domain\Interfaces\UseCase;
 
-class GetAllCrimesCase
+class GetAllCrimes implements UseCase
 {
     private CrimeDAO $crimeDAO;
     public function __construct(CrimeDAO $crimeDAO)

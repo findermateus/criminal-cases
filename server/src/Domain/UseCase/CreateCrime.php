@@ -4,8 +4,9 @@ namespace CriminalCases\App\Domain\UseCase;
 
 use CriminalCases\App\Domain\Entity\Crime;
 use CriminalCases\App\Domain\Interfaces\CrimeRepository;
+use CriminalCases\App\Domain\Interfaces\UseCase;
 
-class CreateCrimeCase
+class CreateCrime implements UseCase
 {
     private Crime $crime;
     private CrimeRepository $crimeRepository;
