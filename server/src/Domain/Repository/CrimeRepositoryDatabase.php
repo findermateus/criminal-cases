@@ -19,7 +19,7 @@ class CrimeRepositoryDatabase extends Repository implements CrimeRepository
         $crime->setCrimeId($this->pdo->lastInsertId());
         return $crime;
     }
-    
+
     public function deleteCrime(int $crimeId): bool
     {
         $this->deleteSuspectsFromCrime($crimeId);
@@ -28,6 +28,21 @@ class CrimeRepositoryDatabase extends Repository implements CrimeRepository
         return $stmt->execute([
             'crime_id' => $crimeId,
         ]);
+    }
+
+    public function solveCrime(int $crimeId, $crimeGuiltyId = null)
+    {
+        $sql = "UPDATE crime SET crime_solved = true ";
+        if (is_numeric($crimeGuiltyId)) {
+            $sql .= ", guilty_id = :guilty_id ";
+        }
+        $sql .= "WHERE crime_id = :crime_id;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'guilty_id' => $crimeGuiltyId,
+            'crime_id' => $crimeId,
+        ]);
+        return $stmt->rowCount();
     }
 
     private function deleteSuspectsFromCrime(int $crimeId): bool

@@ -17,12 +17,12 @@ class DeleteCrime implements UseCase
         $this->crimeRepository = $crimeRepository;
     }
 
-    public function execute()
+    public function execute(mixed $data = null): mixed
     {
         $result = $this->crimeRepository->deleteCrime($this->crimeId);
         return $this->buildResponse($result);
     }
-    
+
     private function buildResponse(bool $result)
     {
         if (!$result) {

@@ -10,4 +10,6 @@ interface CrimeRepository
     public function createCrime(Crime $crime);
 
     public function deleteCrime(int $crimeId);
+
+    public function solveCrime(int $crimeId, $crimeGuiltyId = null);
 }

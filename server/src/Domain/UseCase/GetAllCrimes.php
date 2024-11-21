@@ -12,7 +12,8 @@ class GetAllCrimes implements UseCase
     {
         $this->crimeDAO = $crimeDAO;
     }
-    public function execute()
+
+    public function execute(mixed $data = null): mixed
     {
         $crimes = $this->crimeDAO->getAllCrimesWithSuspects();
         return $this->buildResponse($crimes);

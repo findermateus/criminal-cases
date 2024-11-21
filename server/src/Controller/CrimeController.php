@@ -10,6 +10,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use CriminalCases\App\Domain\UseCase\GetAllCrimes;
 use CriminalCases\App\Domain\UseCase\CreateCrime;
 use CriminalCases\App\Domain\UseCase\DeleteCrime;
+use CriminalCases\App\Domain\UseCase\SolveCrime;
 
 class CrimeController
 {
@@ -39,6 +40,20 @@ class CrimeController
         $crimeRepository = new CrimeRepositoryDatabase($this->getConnection());
         $crimeCase = new DeleteCrime($id, $crimeRepository);
         $result = $crimeCase->execute();
+        $response->getBody()->write($result);
+        return $response;
+    }
+
+    public function solveCrime(Request $request, Response $response, $args)
+    {
+        $post = json_decode($request->getBody(), true);
+        $params = [
+            'crimeId' => $args['id'],
+            'crimeGuiltyId' => $post['crimeGuiltyId']
+        ];
+        $crimeRepository = new CrimeRepositoryDatabase($this->getConnection());
+        $crimeCase = new SolveCrime($crimeRepository);
+        $result = $crimeCase->execute($params);
         $response->getBody()->write($result);
         return $response;
     }
