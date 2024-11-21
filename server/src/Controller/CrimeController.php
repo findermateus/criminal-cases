@@ -28,18 +28,18 @@ class CrimeController
     {
         $post = $request->getParsedBody();
         $crimeRepository = new CrimeRepositoryDatabase($this->getConnection());
-        $crimeCase = new CreateCrime($post, $crimeRepository);
-        $crimeId = $crimeCase->execute();
+        $crimeCase = new CreateCrime($crimeRepository);
+        $crimeId = $crimeCase->execute($post);
         $response->getBody()->write(json_encode(['crimeId' => $crimeId]));
         return $response;
     }
 
-    public function deleteCrime(Request $request, Response $response)
+    public function deleteCrime(Request $request, Response $response, $args)
     {
-        $id = $request->getAttribute('id');
+        $id = $args['id'];
         $crimeRepository = new CrimeRepositoryDatabase($this->getConnection());
-        $crimeCase = new DeleteCrime($id, $crimeRepository);
-        $result = $crimeCase->execute();
+        $crimeCase = new DeleteCrime($crimeRepository);
+        $result = $crimeCase->execute($id);
         $response->getBody()->write($result);
         return $response;
     }

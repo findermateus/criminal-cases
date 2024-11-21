@@ -11,15 +11,14 @@ class DeleteCrime implements UseCase
     private int $crimeId;
     private CrimeRepository $crimeRepository;
 
-    public function __construct(int $crimeId, CrimeRepository $crimeRepository)
+    public function __construct(CrimeRepository $crimeRepository)
     {
-        $this->crimeId = $crimeId;
         $this->crimeRepository = $crimeRepository;
     }
 
-    public function execute(mixed $data = null): mixed
+    public function execute(mixed $crimeId = null): mixed
     {
-        $result = $this->crimeRepository->deleteCrime($this->crimeId);
+        $result = $this->crimeRepository->deleteCrime($crimeId);
         return $this->buildResponse($result);
     }
 
