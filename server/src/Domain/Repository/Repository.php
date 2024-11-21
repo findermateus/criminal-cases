@@ -2,14 +2,13 @@
 
 namespace CriminalCases\App\Domain\Repository;
 
-use CriminalCases\App\Infra\Connection;
 use PDO;
 
 class Repository
 {
     protected PDO $pdo;
-    public function __construct()
+    public function __construct(PDO $connection)
     {
-        $this->pdo = Connection::getConnection();
+        $this->pdo = $connection;
     }
 }
