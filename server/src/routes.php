@@ -12,5 +12,6 @@ return function (App $app) {
         $group->get('/all', CrimeController::class . ':loadAllCrimes');
         $group->post('/add', CrimeController::class . ':createCrime');
         $group->delete('/{id}', CrimeController::class . ':deleteCrime');
+        $group->put('/{id}/solve', CrimeController::class . ':solveCrime');
     });
 };

@@ -2,7 +2,7 @@
 
 namespace CriminalCases\App\Domain\Interfaces;
 
-interface UseCase 
+interface UseCase
 {
-    public function execute();
+    public function execute(mixed $data = null): mixed;
 }
