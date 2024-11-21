@@ -4,6 +4,7 @@ namespace CriminalCases\App\Domain\Entity;
 
 class Crime
 {
+    private int $crimeId;
     private string $crime_title;
     private string $crime_description;
     private bool $crime_solved;
@@ -12,6 +13,10 @@ class Crime
     public function getCrimeTitle(): string
     {
         return $this->crime_title;
+    }
+    public function getCrimeId(): int
+    {
+        return $this->crimeId;
     }
     public function getCrimeDescription(): string
     {
@@ -40,5 +45,9 @@ class Crime
     public function setGuiltyId(int $guilty_id): void
     {
         $this->guilty_id = $guilty_id;
+    }
+    public function setCrimeId(int $crimeId): void
+    {
+        $this->crimeId = $crimeId;
     }
 }

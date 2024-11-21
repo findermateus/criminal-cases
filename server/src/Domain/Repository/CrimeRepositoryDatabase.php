@@ -7,7 +7,7 @@ use CriminalCases\App\Domain\Interfaces\CrimeRepository;
 
 class CrimeRepositoryDatabase extends Repository implements CrimeRepository
 {
-    public function createCrime(Crime $crime)
+    public function createCrime(Crime $crime): Crime
     {
         $sql = "INSERT INTO crime (crime_title, crime_description, crime_solved) ";
         $sql .= "VALUES (:crime_title, :crime_description, false);";
@@ -16,6 +16,7 @@ class CrimeRepositoryDatabase extends Repository implements CrimeRepository
             'crime_title' => $crime->getCrimeTitle(),
             'crime_description' => $crime->getCrimeDescription(),
         ]);
-        return $this->pdo->lastInsertId();
+        $crime->setCrimeId($this->pdo->lastInsertId());
+        return $crime;
     }
 }
