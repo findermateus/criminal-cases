@@ -17,7 +17,8 @@ class CreateCrime implements UseCase
     }
     public function execute()
     {
-        return $this->crimeRepository->createCrime($this->crime);
+        $this->crime = $this->crimeRepository->createCrime($this->crime);
+        return $this->crime->getCrimeId();
     }
     private function setCrime($post)
     {
