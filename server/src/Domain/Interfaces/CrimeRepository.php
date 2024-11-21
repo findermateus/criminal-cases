@@ -6,5 +6,8 @@ use CriminalCases\App\Domain\Entity\Crime;
 
 interface CrimeRepository
 {
+
     public function createCrime(Crime $crime);
+
+    public function deleteCrime(int $crimeId);
 }
