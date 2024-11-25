@@ -8,8 +8,18 @@ class Crime
     private string $crime_title;
     private string $crime_description;
     private bool $crime_solved;
-    private int $guilty_id;
+    private ?int $guilty_id = null;
 
+    public static function create(int $crimeId, string $crime_title, string $crime_description): Crime
+    {
+        return new Crime($crimeId, $crime_title, $crime_description);
+    }
+    private function __construct(int $crimeId, string $crime_title, string $crime_description)
+    {
+        $this->crimeId = $crimeId;
+        $this->crime_title = $crime_title;
+        $this->crime_description = $crime_description;
+    }
     public function getCrimeTitle(): string
     {
         return $this->crime_title;
@@ -26,7 +36,7 @@ class Crime
     {
         return $this->crime_solved;
     }
-    public function getGuiltyId(): int
+    public function getGuiltyId(): ?int
     {
         return $this->guilty_id;
     }

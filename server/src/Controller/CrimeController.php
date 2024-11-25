@@ -11,6 +11,7 @@ use CriminalCases\App\Domain\UseCase\GetAllCrimes;
 use CriminalCases\App\Domain\UseCase\CreateCrime;
 use CriminalCases\App\Domain\UseCase\DeleteCrime;
 use CriminalCases\App\Domain\UseCase\SolveCrime;
+use CriminalCases\App\Domain\UseCase\GetCrimeById;
 
 class CrimeController
 {
@@ -36,10 +37,10 @@ class CrimeController
 
     public function deleteCrime(Request $request, Response $response, $args)
     {
-        $id = $args['id'];
+        $crimeId = $args['id'];
         $crimeRepository = new CrimeRepositoryDatabase($this->getConnection());
         $crimeCase = new DeleteCrime($crimeRepository);
-        $result = $crimeCase->execute($id);
+        $result = $crimeCase->execute($crimeId);
         $response->getBody()->write($result);
         return $response;
     }
@@ -55,6 +56,15 @@ class CrimeController
         $crimeCase = new SolveCrime($crimeRepository);
         $result = $crimeCase->execute($params);
         $response->getBody()->write($result);
+        return $response;
+    }
+    public function loadCrimeById(Request $request, Response $response, $args)
+    {
+        $crimeId = $args['id'];
+        $crimeRepository = new CrimeRepositoryDatabase($this->getConnection());
+        $crimeCase = new GetCrimeById($crimeRepository);
+        $result = $crimeCase->execute($crimeId);
+        $response->getBody()->write(json_encode($result));
         return $response;
     }
 }

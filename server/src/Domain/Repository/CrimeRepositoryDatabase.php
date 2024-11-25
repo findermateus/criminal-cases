@@ -54,4 +54,22 @@ class CrimeRepositoryDatabase extends Repository implements CrimeRepository
         ]);
         return $stmt->rowCount();
     }
+    public function getCrimeById($crimeId)
+    {
+        $sql = "SELECT * FROM crime WHERE crime_id = :crime_id;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'crime_id' => $crimeId,
+        ]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (!$result) {
+            return false;
+        }
+        $crime = Crime::create($crimeId, $result['crime_title'], $result['crime_description']);
+        $crime->setCrimeSolved($result['crime_solved']);
+        if (is_numeric($result['guilty_id'])) {
+            $crime->setGuiltyId($result['guilty_id']);
+        }
+        return $crime;
+    }
 }
