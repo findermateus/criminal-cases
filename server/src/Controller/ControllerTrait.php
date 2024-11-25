@@ -2,14 +2,14 @@
 
 namespace CriminalCases\App\Controller;
 
-use CriminalCases\App\Infra\MySQLConnectionAdapter;
+use CriminalCases\App\Infra\PostgreeSQLConnectionAdapter;
 
 trait ControllerTrait
 {
-    protected MySQLConnectionAdapter $connection;
+    protected PostgreeSQLConnectionAdapter $connection;
     public function __construct()
     {
-        $this->connection = new MySQLConnectionAdapter();
+        $this->connection = new PostgreeSQLConnectionAdapter();
     }
     protected function getConnection()
     {

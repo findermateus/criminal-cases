@@ -7,7 +7,7 @@ use Exception;
 use PDOException;
 use Dotenv\Dotenv;
 
-class MySQLConnectionAdapter implements Connection
+class PostgreeSQLConnectionAdapter implements Connection
 {
     private Dotenv $dotenv;
 
