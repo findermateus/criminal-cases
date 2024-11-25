@@ -11,7 +11,8 @@
     },
     "autoload": {
         "psr-4": {
-            "CriminalCases\\App\\": "src/"
+            "CriminalCases\\App\\": "src/",
+            "CriminalCases\\Tests\\": "tests/"
         }
     },
     "config": {
