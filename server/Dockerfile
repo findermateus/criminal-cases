@@ -1,5 +1,4 @@
-FROM php:8.2-apache AS base
-
+FROM php:8.3-apache AS base
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     libpq-dev \
@@ -8,4 +7,9 @@ RUN apt-get update && \
     docker-php-ext-enable pdo_pgsql && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY ./apache2.conf "$APACHE_CONFDIR/conf-enabled/apache2.conf"
+COPY containerConfig/apache2.conf "$APACHE_CONFDIR/conf-enabled/apache2.conf"
+COPY containerConfig/xdebug.ini "$PHP_INI_DIR/conf.d/xdebug.ini"
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+COPY containerConfig/apache2.conf "$APACHE_CONFDIR/conf-enabled/apache2.conf"

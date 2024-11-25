@@ -1,0 +1,1 @@
+docker exec -it criminal-cases-server ./vendor/bin/pest --init
