@@ -12,4 +12,6 @@ interface CrimeRepository
     public function deleteCrime(int $crimeId);
 
     public function solveCrime(int $crimeId, $crimeGuiltyId = null);
+
+    public function getCrimeById(int $crimeId);
 }
