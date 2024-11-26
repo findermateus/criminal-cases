@@ -18,9 +18,12 @@ class SolveCrime implements UseCase
     public function execute(mixed $crimeData = null): mixed
     {
         $rows = $this->crimeRepository->solveCrime($crimeData['crimeId'], $crimeData['crimeGuiltyId']);
-        if (!$rows) {
-            throw new Exception("Failed to solve the crime");
+        if ($rows === false) {
+            throw new Exception("Suspect ID is not from the crime");
         }
-        return json_encode(['message' => 'Successfully solve the crime']);
+        if ($rows === 0) {
+            throw new Exception("Crime not found");
+        }
+        return json_encode(['message' => 'Successfully solved the crime']);
     }
 }
