@@ -33,17 +33,35 @@ class CrimeRepositoryDatabase extends Repository implements CrimeRepository
 
     public function solveCrime(int $crimeId, $crimeGuiltyId = null)
     {
+        if (!$this->suspectIsFromCrime($crimeId, $crimeGuiltyId)) {
+            return false;
+        }
+        $params = [
+            'crime_id' => $crimeId
+        ];
         $sql = "UPDATE crime SET crime_solved = true ";
         if (is_numeric($crimeGuiltyId)) {
             $sql .= ", guilty_id = :guilty_id ";
+            $params['guilty_id'] = $crimeGuiltyId;
         }
         $sql .= "WHERE crime_id = :crime_id;";
         $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->rowCount();
+    }
+    private function suspectIsFromCrime(int $crimeId, ?int $suspectId  = null): bool
+    {
+        if (is_null($suspectId)) {
+            return true;
+        }
+        $sql = "SELECT * FROM suspect WHERE suspect_id = :suspect_id AND suspect_crime = :crime_id;";
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            'guilty_id' => $crimeGuiltyId,
+            'suspect_id' => $suspectId,
             'crime_id' => $crimeId,
         ]);
-        return $stmt->rowCount();
+        $results = $stmt->fetchAll();
+        return count($results) > 0;
     }
 
     private function deleteSuspectsFromCrime(int $crimeId): bool
