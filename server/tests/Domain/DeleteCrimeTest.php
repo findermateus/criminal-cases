@@ -51,6 +51,12 @@ test("It should delete a specific crime", function () {
     $getCrimeById->execute($crimeIdToBeDeleted);
 })->throws(\Exception::class, 'Crime not found');
 
+test("It should not delete a crime", function ($crimeIdToBeDeleted) {
+    $crimeRepository = new CrimeRepositoryDatabase($this->pdo);
+    $deleteCrime = new DeleteCrime($crimeRepository);
+    $deleteCrime->execute($crimeIdToBeDeleted);
+})->with(['-1', '999'])->throws(\Exception::class, 'Failed to delete crime');
+
 // test("It should delete all suspects of a crime", function (){
 // vai precisar do repository de suspeitos.
 // });
