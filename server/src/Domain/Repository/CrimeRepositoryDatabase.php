@@ -20,14 +20,15 @@ class CrimeRepositoryDatabase extends Repository implements CrimeRepository
         return $crime;
     }
 
-    public function deleteCrime(int $crimeId): bool
+    public function deleteCrime(int $crimeId): int
     {
         $this->deleteSuspectsFromCrime($crimeId);
         $sql = "DELETE FROM crime WHERE crime_id = :crime_id;";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
+        $stmt->execute([
             'crime_id' => $crimeId,
         ]);
+        return $stmt->rowCount();
     }
 
     public function solveCrime(int $crimeId, $crimeGuiltyId = null)
