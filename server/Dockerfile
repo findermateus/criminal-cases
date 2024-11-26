@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY containerConfig/apache2.conf "$APACHE_CONFDIR/conf-enabled/apache2.conf"
-COPY containerConfig/xdebug.ini "$PHP_INI_DIR/conf.d/xdebug.ini"
+#COPY containerConfig/xdebug.ini "$PHP_INI_DIR/conf.d/xdebug.ini"
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

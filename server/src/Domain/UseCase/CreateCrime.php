@@ -20,11 +20,23 @@ class CreateCrime implements UseCase
     {
         $this->setCrime($data);
         $this->crime = $this->crimeRepository->createCrime($this->crime);
-        return $this->crime->getCrimeId();
+        return $this->buildResponse($this->crime);
+    }
+    private function buildResponse($crime)
+    {
+        return [
+            'crime_id' => $crime->getCrimeId(),
+            'crime_title' => $crime->getCrimeTitle(),
+            'crime_description' => $crime->getCrimeDescription(),
+            'crime_solved' => $crime->getCrimeSolved(),
+        ];
     }
 
     private function setCrime($post)
     {
+        if (empty($post['title']) || empty($post['description'])) {
+            throw new \Exception('Invalid arguments');
+        }
         $this->crime = new Crime();
         $this->crime->setCrimeTitle($post['title']);
         $this->crime->setCrimeDescription($post['description']);
